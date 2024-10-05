@@ -9,11 +9,7 @@ import (
 )
 
 var (
-	app = kingpin.New("iot_logserver", "IoT Log Server")
-	// influxUrl           = app.Flag("url", "InfluxDB URL.").Required().String()
-	// influxToken         = app.Flag("token", "InfluxDB token.").Required().String()
-	// influxOrg           = app.Flag("org", "InfluxDB organization.").Required().String()
-	// influxBucket        = app.Flag("bucket", "InfluxDB bucket.").Required().String()
+	app                 = kingpin.New("iot_logserver", "IoT Log Server")
 	udpListenPortString = app.Flag("udpport", "UDP listen port.").Default("12345").String()
 )
 
@@ -22,11 +18,8 @@ func ParseEnv() bool {
 		log.Println("no .env file found")
 		return false
 	}
+
 	log.Println("loading .env file")
-	// *influxUrl = os.Getenv("INFLUX2_URL")
-	// *influxToken = os.Getenv("INFLUX2_TOKEN")
-	// *influxOrg = os.Getenv("INFLUX2_ORG")
-	// *influxBucket = os.Getenv("INFLUX2_BUCKET")
 	*udpListenPortString = os.Getenv("UDPPORT")
 	log.Println(".env file loaded")
 	return true

@@ -1,12 +1,10 @@
 package udpserver
 
 import (
-	"fmt"
 	"log"
 	"net"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/fatih/color"
 )
@@ -46,10 +44,8 @@ func (u *UDPServer) Start() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		// logger.Printf("Received %d bytes from %s: '%s'", n, addr, buffer[:n])
 		// send response
 		udpConn.WriteToUDP([]byte("Received\n"), addr)
-		// we expect line protocol
 		// we need to split the buffer into lines
 		lines := strings.Split(string(buffer[:n]), "\n")
 		for _, line := range lines {
@@ -57,11 +53,7 @@ func (u *UDPServer) Start() {
 			if line == "" {
 				continue
 			}
-			// u.influx2Writer.WritePoint(line)
-			logger.Printf("received line from %s: %s", color.CyanString(addr.String()), color.BlueString(line))
-			// lets add microsecond from current time to the line
-			line = fmt.Sprintf("%s %d", line, time.Now().UnixMicro())
-			logger.Printf("influx > %s", color.GreenString(line))
+			logger.Printf("%s: %s", color.CyanString(addr.String()), color.BlueString(line))
 		}
 	}
 }

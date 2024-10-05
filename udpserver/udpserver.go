@@ -11,7 +11,7 @@ import (
 	"github.com/fatih/color"
 )
 
-var logger *log.Logger = log.New(os.Stdout, color.CyanString("UDPSERVER "), log.LstdFlags|log.Lmicroseconds)
+var logger *log.Logger = log.New(os.Stdout, color.CyanString("UDPLOGGER "), log.LstdFlags|log.Lmicroseconds)
 
 type UDPServer struct {
 	listenPort int
@@ -37,7 +37,7 @@ func (u *UDPServer) Start() {
 	}
 	u.udpConn = udpConn
 	defer udpConn.Close()
-	logger.Printf("UDP server started on port %d", u.listenPort)
+	logger.Printf("UDP Server started on port %d", u.listenPort)
 
 	// read from udpConn
 	buffer := make([]byte, 1024)
@@ -67,7 +67,7 @@ func (u *UDPServer) Start() {
 }
 
 func (u *UDPServer) Stop() {
-	logger.Println("Stopping UDP server")
+	logger.Println("Stopping UDP Server")
 	if u.udpConn != nil {
 		logger.Println("Closing UDP connection")
 		u.udpConn.Close()

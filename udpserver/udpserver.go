@@ -44,8 +44,8 @@ func (u *UDPServer) Start() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		// send response
-		udpConn.WriteToUDP([]byte("Received\n"), addr)
+		// send response ?
+		// udpConn.WriteToUDP([]byte("Received\n"), addr)
 		// we need to split the buffer into lines
 		lines := strings.Split(string(buffer[:n]), "\n")
 		for _, line := range lines {
